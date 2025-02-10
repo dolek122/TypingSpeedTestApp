@@ -1,0 +1,221 @@
+/* Resetowanie marginesów i wypełnienia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stylizacja ciała strony */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Nagłówki */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Główne kontenery */
+.tab-content, .test-tab, .stats-tab, .settings-tab {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Stylizacja nagłówków w sekcjach */
+.tab, .tab-pane {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+}
+
+/* Przyciski */
+button, .button {
+    background-color: #6c63ff;  /* Fioletowy kolor */
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+button:hover, .button:hover {
+    background-color: #5a54e8;  /* Jaśniejszy fiolet */
+    transform: scale(1.05);
+}
+
+/* Wyłączone przyciski */
+button:disabled, .button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Textarea */
+.textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: none;
+    transition: all 0.3s ease;
+}
+
+.textarea:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+}
+
+/* ComboBox */
+.combo-box {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.combo-box:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+}
+
+/* Style dla wyników */
+.result-label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.result-label.success {
+    color: #4caf50;
+}
+
+.result-label.error {
+    color: #f44336;
+}
+
+/* Instrukcje tekstowe */
+.instruction-text {
+    font-size: 18px;
+    color: #555;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+/* Style dla wykresów */
+.chart {
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+}
+
+/* Zmiana wyglądu zakładek */
+.test-tab, .stats-tab, .settings-tab {
+    margin-top: 20px;
+}
+
+/* Tło dla tabów */
+.tab-content, .test-tab, .stats-tab, .settings-tab {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tło dla formularzy */
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Ulepszona nawigacja */
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.nav-tabs .tab {
+    margin: 0 15px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #f4f7fc;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-tabs .tab:hover {
+    background-color: #6c63ff;
+    color: white;
+    transform: scale(1.05);
+}
+
+.nav-tabs .tab.active {
+    background-color: #6c63ff;
+    color: white;
+}
+
+/* Dodatkowe style dla formularzy */
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+}
+
+/* Styl dla menu bocznego */
+.side-menu {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.side-menu a {
+    color: white;
+    display: block;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.side-menu a:hover {
+    color: #6c63ff;
+}

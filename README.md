@@ -1,4 +1,4 @@
-# Typing Speed Test FX  
+# Typing Speed Test
 Aplikacja JavaFX do testowania szybkości pisania.  
 
 ## Funkcje  

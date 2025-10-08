@@ -11,7 +11,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -58,7 +57,6 @@ public class TypingSpeedTestFX extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Typing Speed Test");
 
-        // Layout - Tabs
         TabPane tabPane = new TabPane();
         Tab testTab = new Tab("Test", createTestTab());
         Tab instructionsTab = new Tab("Instrukcje", createInstructionsTab());
@@ -68,7 +66,6 @@ public class TypingSpeedTestFX extends Application {
         tabPane.getTabs().addAll(testTab, instructionsTab, statsTab, settingsTab);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        // Main Scene
         Scene scene = new Scene(tabPane, 600, 400);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
@@ -85,7 +82,6 @@ public class TypingSpeedTestFX extends Application {
 
         testLabel = new Label("Wybierz poziom trudności i kliknij Start");
 
-        // Nowy element TextFlow
         TextFlow textFlow = new TextFlow();
         textFlow.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: lightgray;");
 
@@ -96,36 +92,34 @@ public class TypingSpeedTestFX extends Application {
         submitButton = new Button("Zakończ");
         resultLabel = new Label();
 
-        // Nowy przycisk powrotu do trybu tekstowego
         Button resetButton = new Button("Zresetuj test");
         resetButton.setOnAction(e -> resetTest());
 
         startButton.setOnAction(e -> startTest());
         submitButton.setOnAction(e -> finishTest());
 
-        // Nowy ComboBox do wyboru czasu
         timeBox = new ComboBox<>();
-        timeBox.getItems().addAll(15, 30, 60); // Czas w sekundach
-        timeBox.setValue(30); // Domyślny czas testu
+        timeBox.getItems().addAll(15, 30, 60);
+        timeBox.setValue(30);
 
         timeBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            startButton.setDisable(newValue == null);  // Blokowanie przycisku start w przypadku braku wyboru czasu
+            startButton.setDisable(newValue == null);
         });
 
         userInputArea.textProperty().addListener((observable, oldValue, newValue) -> {
-            highlightErrors(textFlow, newValue); // Wywołanie funkcji
+            highlightErrors(textFlow, newValue);
         });
 
         userInputArea.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 if (!testInProgress) {
-                    startTest(); // Rozpocznij test
+                    startTest();
                     testInProgress = true;
                 } else {
-                    finishTest(); // Zakończ test
+                    finishTest();
                     testInProgress = false;
                 }
-                event.consume(); // Zapobiega dodaniu nowej linii po naciśnięciu Enter
+                event.consume();
             }
         });
 
@@ -134,7 +128,6 @@ public class TypingSpeedTestFX extends Application {
     }
 
     private void resetTest() {
-        // Resetowanie elementów interfejsu do początkowego stanu
         testLabel.setText("Wybierz poziom trudności i kliknij Start");
         userInputArea.clear();
         resultLabel.setText("");
@@ -220,11 +213,9 @@ public class TypingSpeedTestFX extends Application {
         startTime = System.nanoTime();
         startButton.setDisable(true);
 
-        // Ustaw czas testu na podstawie wyboru użytkownika
         testDuration = timeBox.getValue();
         timerRunning = true;
 
-        // Timer w osobnym wątku
         timerThread = new Thread(() -> {
             try {
                 for (int i = testDuration; i > 0; i--) {
@@ -232,9 +223,9 @@ public class TypingSpeedTestFX extends Application {
                     Platform.runLater(() -> resultLabel.setText("Pozostały czas: " + remainingTime + "s"));
                     Thread.sleep(1000);
                 }
-                Platform.runLater(this::finishTest); // Automatyczne zakończenie testu
+                Platform.runLater(this::finishTest);
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt(); // Obsługa przerwania wątku
+                Thread.currentThread().interrupt();
             }
         });
         timerThread.setDaemon(true);
@@ -244,7 +235,7 @@ public class TypingSpeedTestFX extends Application {
     private void finishTest() {
         if (timerThread != null && timerRunning) {
             timerRunning = false;
-            timerThread.interrupt(); // Zatrzymanie wątku timera
+            timerThread.interrupt();
         }
 
         String sampleText = testLabel.getText().trim();
@@ -271,20 +262,16 @@ public class TypingSpeedTestFX extends Application {
     }
 
     private void updateChartData() {
-        // Zlokalizowanie wykresu w zakładce "Statystyki"
         Tab statsTab = ((TabPane) startButton.getScene().getRoot()).getTabs().get(2);
         LineChart<String, Number> chart = (LineChart<String, Number>) ((VBox) statsTab.getContent()).getChildren().get(0);
 
-        // Usuwanie starych danych z wykresu
         chart.getData().clear();
 
-        // Dodanie nowych danych z historii WPM
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         for (int i = 0; i < wpmHistory.size(); i++) {
             series.getData().add(new XYChart.Data<>("Test " + (i + 1), wpmHistory.get(i)));
         }
 
-        // Dodanie serii do wykresu
         chart.getData().add(series);
     }
 
